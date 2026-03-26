@@ -11,12 +11,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="https://hugogustaaf.nl/favicon-96x96.png" sizes="96x96">
-  <link rel="icon" type="image/svg+xml" href="https://hugogustaaf.nl/favicon.svg">
-  <link rel="shortcut icon" href="https://hugogustaaf.nl/favicon.ico">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://hugogustaaf.nl/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/http://hugogustaaf.nl/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="/http://hugogustaaf.nl/favicon.svg">
+  <link rel="shortcut icon" href="/http://hugogustaaf.nl/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/http://hugogustaaf.nl/apple-touch-icon.png">
   <meta name="apple-mobile-web-app-title" content="HG">
-  <link rel="manifest" href="https://hugogustaaf.nl/site.webmanifest">
+  <link rel="manifest" href="/http://hugogustaaf.nl/site.webmanifest">
   <style>
     html, body {
       height: 100%;
@@ -95,7 +95,7 @@
      <section class="grid items-center gap-12 lg:grid-cols-2 mb-20">
       <div class="float-in">
        <div class="mb-6 inline-flex items-center gap-2 rounded-full bg-green-50 px-4 py-2 text-sm border border-green-200">
-        <span class="pulse-dot inline-block h-2 w-2 rounded-full bg-green-600"></span> <span class="text-gray-700">Vandaag beschikbaar voor lokale en landelijke leveringen</span>
+        <span class="pulse-dot inline-block h-2 w-2 rounded-full bg-green-600"></span> <span id="badgeText" class="text-gray-700"></span>
        </div>
        <h1 id="heroTitle" class="max-w-2xl text-5xl md:text-6xl font-bold leading-tight tracking-tight text-gray-900 mb-6"></h1>
        <p id="heroSubtitle" class="max-w-xl text-lg text-gray-600 mb-8 leading-relaxed"></p>
@@ -310,6 +310,7 @@
       font_family: "Geist",
       font_size: 16,
       brand_name: "Hugo Gustaaf",
+      badge_text: "Vandaag beschikbaar voor lokale en landelijke leveringen",
       hero_title: "Snelle bezorging voor pakketten, documenten en spoedritten.",
       hero_subtitle: "Professionele service voor bedrijven en particulieren. Van een enkel pakketje tot een dringende levering op dezelfde dag.",
       button_text: "Plan een rit",
@@ -344,6 +345,7 @@
 
     function cacheElements() {
       els.pageBackground = document.getElementById("pageBackground");
+      els.badgeText = document.getElementById("badgeText");
       els.brandName = document.getElementById("brandName");
       els.heroTitle = document.getElementById("heroTitle");
       els.heroSubtitle = document.getElementById("heroSubtitle");
@@ -386,6 +388,8 @@
           document.body.style.fontFamily = bodyFont;
 
           els.pageBackground.style.backgroundColor = c.background_color;
+          els.badgeText.textContent = c.badge_text;
+          els.badgeText.style.color = c.text_color;
           els.brandName.textContent = c.brand_name;
           els.brandName.style.fontFamily = primaryFont;
           els.brandName.style.color = c.text_color;
@@ -447,6 +451,7 @@
         }),
         mapToEditPanelValues: (config) => new Map([
           ["brand_name", config.brand_name || defaultConfig.brand_name],
+          ["badge_text", config.badge_text || defaultConfig.badge_text],
           ["hero_title", config.hero_title || defaultConfig.hero_title],
           ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
           ["button_text", config.button_text || defaultConfig.button_text],
@@ -634,5 +639,5 @@
       lucide.createIcons();
     });
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e28fce8408fa657',t:'MTc3NDU1NzgxMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e2900ee2425a657',t:'MTc3NDU1Nzk3NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
