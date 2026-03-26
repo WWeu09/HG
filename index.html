@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="nl" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hugo Gustaaf Bezorgservice</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      height: 100%;
+    }
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background: #ffffff;
+      color: #1a1a1a;
+    }
+    .float-in {
+      animation: floatIn 0.7s ease-out forwards;
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    @keyframes floatIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .pulse-dot {
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6);
+      animation: pulseDot 2s infinite;
+    }
+    @keyframes pulseDot {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+      70% { box-shadow: 0 0 0 12px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+    .sticky-nav {
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.95);
+    }
+    .review-card {
+      transition: all 0.3s ease;
+    }
+    .review-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    }
+    .star-fill { color: #10b981; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto">
+   <div id="pageBackground" class="min-h-full w-full relative">
+    <header class="sticky top-0 z-50 w-full sticky-nav border-b border-gray-200">
+     <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-10">
+      <div class="flex items-center gap-3">
+       <div id="brandBadge" class="flex h-10 w-10 items-center justify-center rounded-lg bg-green-600 text-white shadow-md"><i data-lucide="truck" class="h-5 w-5"></i>
+       </div>
+       <div>
+        <p id="brandName" class="font-bold tracking-tight text-lg"></p>
+        <p class="text-xs text-gray-500">Bezorging • Pakketservice</p>
+       </div>
+      </div>
+      <div class="hidden md:flex items-center gap-8"><a href="#diensten" class="text-sm font-medium text-gray-700 hover:text-green-600 transition">Diensten</a> <a href="#tarieven" class="text-sm font-medium text-gray-700 hover:text-green-600 transition">Tarieven</a> <a href="#reviews" class="text-sm font-medium text-gray-700 hover:text-green-600 transition">Reviews</a> <a href="#contact" class="text-sm font-medium text-gray-700 hover:text-green-600 transition">Contact</a>
+      </div><button id="mobileMenuBtn" class="md:hidden p-2 hover:bg-gray-100 rounded-lg transition"> <i data-lucide="menu" class="h-5 w-5 text-gray-700"></i> </button>
+     </div>
+    </header>
+    <main class="relative z-10 mx-auto flex w-full max-w-7xl flex-col px-6 pb-16 pt-12 md:px-10 md:pt-20">
+     <section class="grid items-center gap-12 lg:grid-cols-2 mb-20">
+      <div class="float-in">
+       <div class="mb-6 inline-flex items-center gap-2 rounded-full bg-green-50 px-4 py-2 text-sm border border-green-200"><span class="pulse-dot inline-block h-2 w-2 rounded-full bg-green-600"></span> <span class="text-gray-700">Vandaag beschikbaar voor lokale en landelijke leveringen</span>
+       </div>
+       <h1 id="heroTitle" class="max-w-2xl text-5xl md:text-6xl font-bold leading-tight tracking-tight text-gray-900 mb-6"></h1>
+       <p id="heroSubtitle" class="max-w-xl text-lg text-gray-600 mb-8 leading-relaxed"></p>
+       <div class="flex flex-col gap-4 sm:flex-row"><button id="heroButton" class="inline-flex items-center justify-center gap-2 rounded-lg px-8 py-4 font-semibold bg-green-600 text-white hover:bg-green-700 transition shadow-lg hover:shadow-xl duration-200"> <i data-lucide="send" class="h-5 w-5"></i> <span id="buttonText"></span> </button> <a href="#tarieven" class="inline-flex items-center justify-center gap-2 rounded-lg px-8 py-4 font-semibold border border-gray-300 text-gray-900 hover:bg-gray-50 transition"> <i data-lucide="package-check" class="h-5 w-5"></i> Bekijk tarieven </a>
+       </div>
+       <div class="mt-12 grid gap-6 sm:grid-cols-3">
+        <div class="float-in delay-1 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+         <p class="text-xs uppercase tracking-wider text-gray-500 font-semibold">Gemiddeld</p>
+         <p class="mt-3 text-4xl font-bold text-gray-900">45 min</p>
+         <p class="mt-2 text-sm text-gray-600">Snelle stadsleveringen</p>
+        </div>
+        <div class="float-in delay-2 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+         <p class="text-xs uppercase tracking-wider text-gray-500 font-semibold">Actief</p>
+         <p class="mt-3 text-4xl font-bold text-gray-900">7 dagen</p>
+         <p class="mt-2 text-sm text-gray-600">Flexibele planning</p>
+        </div>
+        <div class="float-in delay-3 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+         <p class="text-xs uppercase tracking-wider text-gray-500 font-semibold">Service</p>
+         <p class="mt-3 text-4xl font-bold text-gray-900">24/7</p>
+         <p class="mt-2 text-sm text-gray-600">Spoedritten mogelijk</p>
+        </div>
+       </div>
+      </div>
+      <div class="float-in relative h-96 md:h-full rounded-2xl bg-gradient-to-br from-green-50 to-blue-50 border border-gray-200 flex items-center justify-center overflow-hidden">
+       <div class="absolute inset-0 bg-gradient-to-br from-green-100 opacity-40"></div>
+       <div class="relative text-center px-8">
+        <div class="mb-6 inline-flex h-24 w-24 items-center justify-center rounded-full bg-green-600 text-white shadow-xl"><i data-lucide="truck" class="h-12 w-12"></i>
+        </div>
+        <p class="text-2xl font-bold text-gray-900">Snelle bezorging</p>
+        <p class="mt-2 text-gray-600">altijd op de juiste plaats, op het juiste moment</p>
+       </div>
+      </div>
+     </section>
+     <section id="diensten" class="mb-20">
+      <div class="mb-12">
+       <p class="text-xs uppercase tracking-widest font-semibold text-gray-500">Diensten</p>
+       <h2 id="servicesTitle" class="mt-3 text-4xl md:text-5xl font-bold text-gray-900"></h2>
+      </div>
+      <div class="grid gap-8 md:grid-cols-3">
+       <article class="float-in delay-1 rounded-xl border border-gray-200 bg-white p-8 shadow-sm hover:shadow-md transition">
+        <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-green-100 text-green-600"><i data-lucide="package" class="h-6 w-6"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-900 mb-3">Pakketbezorging</h3>
+        <p class="text-gray-600 leading-relaxed">Voor webshops, kleine bedrijven en particuliere zendingen met snelle afhandeling en betrouwbare service.</p>
+       </article>
+       <article class="float-in delay-2 rounded-xl border border-gray-200 bg-white p-8 shadow-sm hover:shadow-md transition">
+        <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-green-100 text-green-600"><i data-lucide="zap" class="h-6 w-6"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-900 mb-3">Spoedritten</h3>
+        <p class="text-gray-600 leading-relaxed">Dringende levering nodig? Wij regelen een directe rit zonder gedoe en met prioriteit.</p>
+       </article>
+       <article class="float-in delay-3 rounded-xl border border-gray-200 bg-white p-8 shadow-sm hover:shadow-md transition">
+        <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-green-100 text-green-600"><i data-lucide="file-text" class="h-6 w-6"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-900 mb-3">Documentservice</h3>
+        <p class="text-gray-600 leading-relaxed">Veilige bezorging van contracten, dossiers en zakelijke documenten met volledige verantwoording.</p>
+       </article>
+      </div>
+     </section>
+     <section id="tarieven" class="mb-20">
+      <div class="mb-12">
+       <p class="text-xs uppercase tracking-widest font-semibold text-gray-500">Prijzen</p>
+       <h2 id="pricingTitle" class="mt-3 text-4xl md:text-5xl font-bold text-gray-900">Duidelijke prijzen, snelle service</h2>
+      </div>
+      <div class="grid gap-8 md:grid-cols-3">
+       <div class="float-in delay-1 rounded-xl border border-gray-200 bg-white p-8 shadow-sm hover:shadow-md transition">
+        <p class="text-xs uppercase tracking-widest font-semibold text-gray-500">Basis</p>
+        <p class="mt-4 text-5xl font-bold text-gray-900">€9,95</p>
+        <p class="mt-4 text-gray-600">Lokale levering van kleine pakketten.</p>
+       </div>
+       <div class="float-in delay-2 rounded-xl border border-gray-200 bg-white p-8 shadow-sm hover:shadow-md transition relative">
+        <div class="absolute top-0 right-0 bg-green-600 text-white px-4 py-1 rounded-bl-lg text-xs font-bold">
+         POPULAIR
+        </div>
+        <p class="text-xs uppercase tracking-widest font-semibold text-gray-500">Zakelijk</p>
+        <p class="mt-4 text-5xl font-bold text-gray-900">€19,95</p>
+        <p class="mt-4 text-gray-600">Voor meerdere stops en vaste klanten.</p>
+       </div>
+       <div class="float-in delay-3 rounded-xl border border-gray-200 bg-white p-8 shadow-sm hover:shadow-md transition">
+        <p class="text-xs uppercase tracking-widest font-semibold text-gray-500">Spoed</p>
+        <p class="mt-4 text-5xl font-bold text-gray-900">€29,95</p>
+        <p class="mt-4 text-gray-600">Snelle rit met voorrang en directe verwerking.</p>
+       </div>
+      </div>
+     </section>
+     <section id="reviews" class="mb-20">
+      <div class="mb-12">
+       <p class="text-xs uppercase tracking-widest font-semibold text-gray-500">Reviews</p>
+       <h2 id="reviewsTitle" class="mt-3 text-4xl md:text-5xl font-bold text-gray-900">Wat klanten zeggen</h2>
+      </div>
+      <div id="reviewsList" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-8"><!-- Reviews worden hier ingeladen vanuit data -->
+      </div>
+      <div id="reviewFormWrap" class="rounded-xl border border-gray-200 bg-white p-8 shadow-sm">
+       <h3 class="text-2xl font-bold text-gray-900 mb-6">Deel jouw ervaring</h3>
+       <form id="reviewForm" class="space-y-4">
+        <div><label for="review_name" class="block text-sm font-semibold text-gray-900 mb-2">Naam</label> <input id="review_name" type="text" name="name" placeholder="Jouw naam" class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent" required>
+        </div>
+        <div class="grid md:grid-cols-2 gap-4">
+         <div><label for="review_email" class="block text-sm font-semibold text-gray-900 mb-2">E-mailadres</label> <input id="review_email" type="email" name="email" placeholder="jouw@email.nl" class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent" required>
+         </div>
+         <div><label for="review_rating" class="block text-sm font-semibold text-gray-900 mb-2">Beoordeling</label> <select id="review_rating" name="rating" class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent" required> <option value="5">⭐⭐⭐⭐⭐ Excellent</option> <option value="4">⭐⭐⭐⭐ Goed</option> <option value="3">⭐⭐⭐ Neutraal</option> <option value="2">⭐⭐ Slecht</option> <option value="1">⭐ Zeer slecht</option> </select>
+         </div>
+        </div>
+        <div><label for="review_text" class="block text-sm font-semibold text-gray-900 mb-2">Jouw review</label> <textarea id="review_text" name="text" placeholder="Vertel ons wat je ervaringen zijn..." class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent resize-none" rows="4" required></textarea>
+        </div><button id="submitReview" type="submit" class="w-full rounded-lg bg-green-600 text-white px-6 py-3 font-semibold hover:bg-green-700 transition"> Plaats review </button>
+        <div id="reviewFormMessage" class="hidden rounded-lg border px-4 py-3 text-sm"></div>
+       </form>
+      </div>
+     </section>
+     <section id="contact" class="mb-10">
+      <div class="mb-12">
+       <p class="text-xs uppercase tracking-widest font-semibold text-gray-500">Contact</p>
+       <h2 id="contactTitle" class="mt-3 text-4xl md:text-5xl font-bold text-gray-900">Klaar om jouw zending te laten bezorgen?</h2>
+      </div>
+      <div class="grid gap-8 lg:grid-cols-2">
+       <div id="messageFormWrap" class="rounded-xl border border-gray-200 bg-white p-8 shadow-sm">
+        <h3 class="text-2xl font-bold text-gray-900 mb-6">Stuur ons een bericht</h3>
+        <form id="messageForm" class="space-y-4">
+         <div><label for="msg_naam" class="block text-sm font-semibold text-gray-900 mb-2">Naam</label> <input id="msg_naam" type="text" name="naam" placeholder="Jan Jansen" class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent" required>
+         </div>
+         <div><label for="msg_email" class="block text-sm font-semibold text-gray-900 mb-2">E-mailadres</label> <input id="msg_email" type="email" name="email" placeholder="jouw@email.nl" class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent" required>
+         </div>
+         <div><label for="msg_telefoon" class="block text-sm font-semibold text-gray-900 mb-2">Telefoonnummer</label> <input id="msg_telefoon" type="tel" name="telefoon" placeholder="06 12 34 56 78" class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent" required>
+         </div>
+         <div><label for="msg_onderwerp" class="block text-sm font-semibold text-gray-900 mb-2">Onderwerp</label> <input id="msg_onderwerp" type="text" name="onderwerp" placeholder="Onderwerp van je bericht" class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent" required>
+         </div>
+         <div><label for="msg_bericht" class="block text-sm font-semibold text-gray-900 mb-2">Bericht</label> <textarea id="msg_bericht" name="bericht" placeholder="Vertel ons wat je nodig hebt..." class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent resize-none" rows="5" required></textarea>
+         </div><button id="submitMessage" type="submit" class="w-full rounded-lg bg-blue-600 text-white px-6 py-3 font-semibold hover:bg-blue-700 transition"> Verstuur bericht </button>
+         <div id="messageFormMessage" class="hidden rounded-lg border px-4 py-3 text-sm"></div>
+        </form>
+       </div>
+       <div id="offerteFormWrap" class="rounded-xl border border-gray-200 bg-white p-8 shadow-sm">
+        <h3 class="text-2xl font-bold text-gray-900 mb-6">Offerte aanvragen</h3>
+        <form id="offerteContactForm" class="space-y-4">
+         <div><label for="off_naam" class="block text-sm font-semibold text-gray-900 mb-2">Naam</label> <input id="off_naam" type="text" name="naam" placeholder="Jan Jansen" class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent" required>
+         </div>
+         <div><label for="off_email" class="block text-sm font-semibold text-gray-900 mb-2">E-mailadres</label> <input id="off_email" type="email" name="email" placeholder="jouw@email.nl" class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent" required>
+         </div>
+         <div><label for="off_telefoon" class="block text-sm font-semibold text-gray-900 mb-2">Telefoonnummer</label> <input id="off_telefoon" type="tel" name="telefoon" placeholder="06 12 34 56 78" class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent" required>
+         </div>
+         <div><label for="off_bedrijf" class="block text-sm font-semibold text-gray-900 mb-2">Bedrijf</label> <input id="off_bedrijf" type="text" name="bedrijf" placeholder="Jouw Bedrijf BV" class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent">
+         </div>
+         <div><label for="off_product" class="block text-sm font-semibold text-gray-900 mb-2">Type zending</label> <select id="off_product" name="product" class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent" required> <option>Documenten</option> <option>Kleine pakketten</option> <option>Grote pakketten</option> <option>Spoedlevering</option> </select>
+         </div>
+         <div><label for="off_budget" class="block text-sm font-semibold text-gray-900 mb-2">Budget (optioneel)</label> <input id="off_budget" type="text" name="budget" placeholder="€1500" class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent">
+         </div>
+         <div><label for="off_omschrijving" class="block text-sm font-semibold text-gray-900 mb-2">Omschrijving</label> <textarea id="off_omschrijving" name="omschrijving" placeholder="Vertel ons wat je nodig hebt..." class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent resize-none" rows="5" required></textarea>
+         </div><button id="submitOfferte" type="submit" class="w-full rounded-lg bg-blue-600 text-white px-6 py-3 font-semibold hover:bg-blue-700 transition"> Vraag offerte aan </button>
+         <div id="offerteFormMessage" class="hidden rounded-lg border px-4 py-3 text-sm"></div>
+        </form>
+       </div>
+      </div>
+     </section>
+    </main>
+   </div>
+   <footer class="bg-gray-900 text-white">
+    <div class="mx-auto max-w-7xl px-6 py-12 md:px-10">
+     <div class="grid gap-8 md:grid-cols-4 mb-8">
+      <div>
+       <div class="flex items-center gap-2 mb-3">
+        <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-green-600"><i data-lucide="truck" class="h-4 w-4"></i>
+        </div>
+        <p class="font-bold">Hugo Gustaaf</p>
+       </div>
+       <p class="text-sm text-gray-400">Snelle bezorging, betrouwbare service.</p>
+      </div>
+      <div>
+       <p class="font-semibold mb-3 text-sm uppercase tracking-wider">Diensten</p>
+       <ul class="space-y-2 text-sm text-gray-400">
+        <li><a href="#diensten" class="hover:text-white transition">Pakketbezorging</a></li>
+        <li><a href="#diensten" class="hover:text-white transition">Spoedritten</a></li>
+        <li><a href="#diensten" class="hover:text-white transition">Documentservice</a></li>
+       </ul>
+      </div>
+      <div>
+       <p class="font-semibold mb-3 text-sm uppercase tracking-wider">Informatie</p>
+       <ul class="space-y-2 text-sm text-gray-400">
+        <li><a href="#tarieven" class="hover:text-white transition">Tarieven</a></li>
+        <li><a href="#reviews" class="hover:text-white transition">Reviews</a></li>
+        <li><a href="#contact" class="hover:text-white transition">Contact</a></li>
+       </ul>
+      </div>
+      <div>
+       <p class="font-semibold mb-3 text-sm uppercase tracking-wider">Contact</p>
+       <p class="text-sm text-gray-400"><i data-lucide="phone" class="h-4 w-4 inline mr-2"></i> <a href="tel:+31612345678" class="hover:text-white transition">06 12 34 56 78</a></p>
+       <p class="text-sm text-gray-400 mt-2"><i data-lucide="mail" class="h-4 w-4 inline mr-2"></i> <a href="mailto:info@hugogustaaf.nl" class="hover:text-white transition">info@hugogustaaf.nl</a></p>
+      </div>
+     </div>
+     <div class="border-t border-gray-800 pt-8">
+      <p class="text-sm text-gray-400 text-center" id="footerText"></p>
+     </div>
+    </div>
+   </footer>
+  </div>
+  <script>
+    const defaultConfig = {
+      background_color: "#ffffff",
+      surface_color: "#f9fafb",
+      text_color: "#1a1a1a",
+      primary_action_color: "#10b981",
+      secondary_action_color: "#0284c7",
+      font_family: "Geist",
+      font_size: 16,
+      brand_name: "Hugo Gustaaf",
+      hero_title: "Snelle bezorging voor pakketten, documenten en spoedritten.",
+      hero_subtitle: "Professionele service voor bedrijven en particulieren. Van een enkel pakketje tot een dringende levering op dezelfde dag.",
+      button_text: "Plan een rit",
+      services_title: "Wat wij bezorgen",
+      reviews_title: "Wat klanten zeggen",
+      contact_title: "Klaar om jouw zending te laten bezorgen?",
+      footer_text: "Hugo Gustaaf staat klaar voor snelle leveringen, vaste routes en spoedopdrachten door heel Nederland.",
+      api_url: "https://script.google.com/macros/s/AKfycbwzM75p8qkkyN0jHswdR0jtl5TW4hACOWXeXCcLART75JCbE94_oIzu4Z8pjm0YZIto/exec"
+    };
+
+    const els = {};
+    let currentReviews = [];
+
+    function cacheElements() {
+      els.pageBackground = document.getElementById("pageBackground");
+      els.brandName = document.getElementById("brandName");
+      els.heroTitle = document.getElementById("heroTitle");
+      els.heroSubtitle = document.getElementById("heroSubtitle");
+      els.buttonText = document.getElementById("buttonText");
+      els.heroButton = document.getElementById("heroButton");
+      els.servicesTitle = document.getElementById("servicesTitle");
+      els.reviewsTitle = document.getElementById("reviewsTitle");
+      els.contactTitle = document.getElementById("contactTitle");
+      els.footerText = document.getElementById("footerText");
+      els.reviewsList = document.getElementById("reviewsList");
+    }
+
+    async function onConfigChange(config) {
+      const c = { ...defaultConfig, ...config };
+      const primaryFont = `${c.font_family}, "Inter", sans-serif`;
+      const bodyFont = `${c.font_family}, "Inter", sans-serif`;
+
+      document.body.style.backgroundColor = c.background_color;
+      document.body.style.color = c.text_color;
+      document.body.style.fontFamily = bodyFont;
+
+      els.pageBackground.style.backgroundColor = c.background_color;
+      els.brandName.textContent = c.brand_name;
+      els.brandName.style.fontFamily = primaryFont;
+      els.brandName.style.color = c.text_color;
+
+      els.heroTitle.textContent = c.hero_title;
+      els.heroTitle.style.fontFamily = primaryFont;
+      els.heroTitle.style.color = c.text_color;
+
+      els.heroSubtitle.textContent = c.hero_subtitle;
+      els.heroSubtitle.style.fontFamily = bodyFont;
+      els.heroSubtitle.style.color = c.text_color;
+
+      els.buttonText.textContent = c.button_text;
+      els.heroButton.style.backgroundColor = c.primary_action_color;
+
+      els.servicesTitle.textContent = c.services_title;
+      els.servicesTitle.style.fontFamily = primaryFont;
+      els.servicesTitle.style.color = c.text_color;
+
+      els.reviewsTitle.textContent = c.reviews_title;
+      els.reviewsTitle.style.fontFamily = primaryFont;
+      els.reviewsTitle.style.color = c.text_color;
+
+      els.contactTitle.textContent = c.contact_title;
+      els.contactTitle.style.fontFamily = primaryFont;
+      els.contactTitle.style.color = c.text_color;
+
+      els.footerText.textContent = c.footer_text;
+      els.footerText.style.fontFamily = bodyFont;
+      els.footerText.style.color = c.text_color;
+
+      document.querySelectorAll("h1, h2, h3").forEach(el => {
+        el.style.fontFamily = primaryFont;
+        el.style.color = c.text_color;
+      });
+
+      document.querySelectorAll("p, a, button, label, input, select, textarea, span").forEach(el => {
+        el.style.fontFamily = bodyFont;
+      });
+    }
+
+    function renderReviews(reviews) {
+      const container = els.reviewsList;
+      container.innerHTML = reviews.map(review => `
+        <div class="review-card rounded-lg border border-gray-200 bg-white p-6">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <p class="font-semibold text-gray-900">${review.name || 'Anoniem'}</p>
+              <p class="text-sm text-gray-500">${new Date(review.created_at).toLocaleDateString('nl-NL')}</p>
+            </div>
+            <div class="text-lg">${'⭐'.repeat(review.rating)}</div>
+          </div>
+          <p class="text-gray-600 text-sm leading-relaxed">${review.text}</p>
+        </div>
+      `).join('');
+    }
+
+    if (window.elementSdk) {
+      cacheElements();
+
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.primary_action_color || defaultConfig.primary_action_color,
+              set: (value) => window.elementSdk.setConfig({ primary_action_color: value })
+            },
+            {
+              get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+              set: (value) => window.elementSdk.setConfig({ secondary_action_color: value })
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => window.elementSdk.setConfig({ font_family: value })
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => window.elementSdk.setConfig({ font_size: value })
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["brand_name", config.brand_name || defaultConfig.brand_name],
+          ["hero_title", config.hero_title || defaultConfig.hero_title],
+          ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+          ["button_text", config.button_text || defaultConfig.button_text],
+          ["services_title", config.services_title || defaultConfig.services_title],
+          ["reviews_title", config.reviews_title || defaultConfig.reviews_title],
+          ["contact_title", config.contact_title || defaultConfig.contact_title],
+          ["footer_text", config.footer_text || defaultConfig.footer_text],
+          ["api_url", config.api_url || defaultConfig.api_url]
+        ])
+      });
+    } else {
+      window.addEventListener("DOMContentLoaded", async () => {
+        cacheElements();
+        await onConfigChange(defaultConfig);
+      });
+    }
+
+    // Initialize Data SDK
+    const dataHandler = {
+      onDataChanged(reviews) {
+        currentReviews = reviews;
+        if (reviews && reviews.length > 0) {
+          renderReviews(reviews);
+        }
+      }
+    };
+
+    (async () => {
+      if (window.dataSdk) {
+        await window.dataSdk.init(dataHandler);
+      }
+    })();
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      cacheElements();
+
+      const messageForm = document.getElementById("messageForm");
+      const reviewForm = document.getElementById("reviewForm");
+      const offerteContactForm = document.getElementById("offerteContactForm");
+      const messageFormMessage = document.getElementById("messageFormMessage");
+      const reviewFormMessage = document.getElementById("reviewFormMessage");
+      const offerteFormMessage = document.getElementById("offerteFormMessage");
+
+      function showMessage(element, text, isError = false) {
+        element.textContent = text;
+        element.classList.remove("hidden");
+        element.className = "hidden rounded-lg border px-4 py-3 text-sm";
+        if (isError) {
+          element.className = "rounded-lg border border-red-300 bg-red-50 text-red-700 px-4 py-3 text-sm";
+        } else {
+          element.className = "rounded-lg border border-green-300 bg-green-50 text-green-700 px-4 py-3 text-sm";
+        }
+      }
+
+      // Review form submission
+      reviewForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const name = document.getElementById("review_name").value.trim();
+        const email = document.getElementById("review_email").value.trim();
+        const rating = parseInt(document.getElementById("review_rating").value);
+        const text = document.getElementById("review_text").value.trim();
+
+        if (!name || !email || !text) {
+          showMessage(reviewFormMessage, "Vul alstublieft alle velden in.", true);
+          return;
+        }
+
+        const submitBtn = reviewForm.querySelector("button[type='submit']");
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Verzenden...";
+
+        try {
+          const result = await window.dataSdk.create({
+            name: name,
+            email: email,
+            rating: rating,
+            text: text,
+            created_at: new Date().toISOString()
+          });
+
+          if (result.isOk) {
+            showMessage(reviewFormMessage, "✓ Review geplaatst! Bedankt voor je feedback.");
+            reviewForm.reset();
+          } else {
+            showMessage(reviewFormMessage, "Fout bij opslaan. Probeer opnieuw.", true);
+          }
+        } catch (error) {
+          console.error("Fout bij versturen:", error);
+          showMessage(reviewFormMessage, "Verbindingsfout. Probeer het later opnieuw.", true);
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Plaats review";
+        }
+      });
+
+      // Message form (contact section)
+      messageForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const naam = document.getElementById("msg_naam").value.trim();
+        const email = document.getElementById("msg_email").value.trim();
+        const telefoon = document.getElementById("msg_telefoon").value.trim();
+        const onderwerp = document.getElementById("msg_onderwerp").value.trim();
+        const bericht = document.getElementById("msg_bericht").value.trim();
+
+        if (!naam || !email || !telefoon || !onderwerp || !bericht) {
+          showMessage(messageFormMessage, "Vul alstublieft alle velden in.", true);
+          return;
+        }
+
+        const submitBtn = messageForm.querySelector("button[type='submit']");
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Verzenden...";
+
+        try {
+          const apiUrl = window.elementSdk?.config?.api_url || defaultConfig.api_url;
+          const payload = {
+            type: "bericht",
+            naam: naam,
+            email: email,
+            telefoon: telefoon,
+            onderwerp: onderwerp,
+            bericht: bericht
+          };
+
+          const response = await fetch(apiUrl, {
+            method: "POST",
+            body: JSON.stringify(payload)
+          });
+
+          const result = await response.json();
+
+          if (result.status === "success") {
+            showMessage(messageFormMessage, "✓ Bericht verzonden! We nemen zo snel mogelijk contact met je op.");
+            messageForm.reset();
+          } else {
+            showMessage(messageFormMessage, "Fout bij verzenden. Probeer later opnieuw.", true);
+          }
+        } catch (error) {
+          console.error("Fout bij versturen:", error);
+          showMessage(messageFormMessage, "Verbindingsfout. Controleer je internetverbinding.", true);
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Verstuur bericht";
+        }
+      });
+
+      // Offerte form (contact section)
+      offerteContactForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const naam = document.getElementById("off_naam").value.trim();
+        const email = document.getElementById("off_email").value.trim();
+        const telefoon = document.getElementById("off_telefoon").value.trim();
+        const bedrijf = document.getElementById("off_bedrijf").value.trim();
+        const product = document.getElementById("off_product").value.trim();
+        const budget = document.getElementById("off_budget").value.trim();
+        const omschrijving = document.getElementById("off_omschrijving").value.trim();
+
+        if (!naam || !email || !telefoon || !product || !omschrijving) {
+          showMessage(offerteFormMessage, "Vul alstublieft alle verplichte velden in.", true);
+          return;
+        }
+
+        const submitBtn = offerteContactForm.querySelector("button[type='submit']");
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Verzenden...";
+
+        try {
+          const apiUrl = window.elementSdk?.config?.api_url || defaultConfig.api_url;
+          const payload = {
+            type: "offerte",
+            naam: naam,
+            email: email,
+            telefoon: telefoon,
+            bedrijf: bedrijf,
+            product: product,
+            budget: budget,
+            omschrijving: omschrijving
+          };
+
+          const response = await fetch(apiUrl, {
+            method: "POST",
+            body: JSON.stringify(payload)
+          });
+
+          const result = await response.json();
+
+          if (result.status === "success") {
+            showMessage(offerteFormMessage, "✓ Offerteverzoek verzonden! We sturen je snel een voorstel.");
+            offerteContactForm.reset();
+          } else {
+            showMessage(offerteFormMessage, "Fout bij verzenden. Probeer later opnieuw.", true);
+          }
+        } catch (error) {
+          console.error("Fout bij versturen:", error);
+          showMessage(offerteFormMessage, "Verbindingsfout. Controleer je internetverbinding.", true);
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Vraag offerte aan";
+        }
+      });
+
+      lucide.createIcons();
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e2891bf64feaa76',t:'MTc3NDU1MzQyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
